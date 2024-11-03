@@ -1,8 +1,12 @@
+from pathlib import Path
+from venv import logger
+
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 
+from clear_folder_from_old_files import delete_old_files, delete_old_folder
 from crome_options import setting_chrome_options
 from image_downloader import downloader
 from write_album_name_to_file import save_album_name, read_albums
@@ -34,14 +38,16 @@ if __name__ == '__main__':
     # получаю ссылку на самый свежий альбом
     _last_album_url = last_album(_all_albums)
 
-    # нужно получить ссылки на све снимки в альбоме
+    # нужно получить ссылки на все снимки в альбоме
     images_links_list = all_images(_last_album_url)[0]
     # получаю название альбома
     _album_name = all_images(_last_album_url)[1]
+    Path(f'images/{_album_name}').mkdir(parents=True, exist_ok=True)
+    path_to_download = Path(f'images/{_album_name}')
+    print(_album_name)
 
     # проверяю не скачан ли альбом ранее
     old_albums = read_albums()
-    print(old_albums)
 
     if _album_name + '\n' not in old_albums:
 
@@ -49,7 +55,19 @@ if __name__ == '__main__':
 
         # игровые снимки начинаются примерно с 40 кадра, берем срез в 20 снимков
         for image_link in images_links_list[40: 60]:
+        # for image_link in images_links_list:
             print(image_link)
-            # downloader(image_link)
+            downloader(image_link, _album_name)
+
+            # upload fresh images
+
+            # delete downloaded files after upload
+
     else:
         print("NO NEW ALBUMS")
+
+    # delete_old_files(path_to_download, 'jpg', 1)
+
+    delete_old_folder('images', 1)
+
+
