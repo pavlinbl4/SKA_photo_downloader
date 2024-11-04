@@ -17,33 +17,18 @@ logger.add(log_file_path, format="{time} {level} {message}", level="INFO")
 
 
 def delete_old_files(directory, extensions, minutes):
-    # logger.info("Check old files in folder")
-    """
-    Удаляет файлы с указанными расширениями в заданной директории,
-    если они были созданы или изменены раньше, чем указанное число дней от текущей даты.
-
-    Args:
-        directory (str): Путь к директории.
-        extensions (list): Список расширений файлов для удаления (например, ['.tmp', '.log']).
-        days (int): Количество дней, после которых файлы будут удалены.
-    """
     cutoff_date = datetime.now() - timedelta(minutes=minutes)
     count = 0
 
     # Store the list of files once to avoid multiple calls
     all_files = os.listdir(directory)
-    # logger.info(f"Files found: {all_files}")
 
     for ext in extensions:
         files = [os.path.join(directory, f) for f in all_files if f.endswith(ext)]
         for file in files:
             try:
                 modified_date = datetime.fromtimestamp(os.path.getmtime(file))
-                # logger.info(f'{file} modified at {modified_date}, cutoff date {cutoff_date}')
-                # logger.info(f" modification time {modified_date < cutoff_date}")
                 if modified_date < cutoff_date:
-                    # logger.info(f'{file = }')
-                    # logger.info(f'{os.path.isfile(file) = }')
                     if os.path.isfile(file):
                         os.remove(file)
                         logger.info(f"Удален файл: {file}")
