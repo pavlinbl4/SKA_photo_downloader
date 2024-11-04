@@ -1,6 +1,6 @@
 import unittest
 
-from fille_name_from_link import extract_file_name
+from file_name_from_link import extract_file_name
 
 
 class TestExtractFileName(unittest.TestCase):
@@ -31,6 +31,7 @@ class TestExtractFileName(unittest.TestCase):
     def test_url_with_no_filename(self):
         url = "http://example.com/path/to/"
         self.assertEqual(extract_file_name(url), "")
+
 
 if __name__ == "__main__":
     unittest.main()
