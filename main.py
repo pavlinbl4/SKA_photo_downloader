@@ -1,15 +1,16 @@
 from pathlib import Path
-from venv import logger
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
+from webdriver_manager.chrome import ChromeDriverManager
 
-from clear_folder_from_old_files import delete_old_files, delete_old_folder
+from clear_folder_from_old_files import delete_old_folder
 from crome_options import setting_chrome_options
 from image_downloader import downloader
+from send_message_to_telegram import send_telegram_message
 from write_album_name_to_file import save_album_name, read_albums
+from write_data_to_iptc import write_iptc
 
 service = Service(ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service, options=setting_chrome_options())
@@ -52,12 +53,15 @@ if __name__ == '__main__':
     if _album_name + '\n' not in old_albums:
 
         save_album_name(_album_name)
+        send_telegram_message(_album_name)
 
         # игровые снимки начинаются примерно с 40 кадра, берем срез в 20 снимков
-        for image_link in images_links_list[40: 60]:
+        for image_link in images_links_list[40: 80]:
         # for image_link in images_links_list:
             print(image_link)
             downloader(image_link, _album_name)
+
+        write_iptc(path_to_download, _album_name)
 
             # upload fresh images
 
