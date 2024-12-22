@@ -5,14 +5,18 @@ from icecream import ic
 
 
 def write_tags_to_image(file, _album_name):
-    caption = (f'Хоккейный матч между командами                 '
+    caption = (f'Хоккейный матч между командами '
                f'{_album_name}'
-               f'                                    '
+               f''
                f'ХК СКА')
     edited_tags = {"XMP:Title": 'ХОККЕЙ',
                    "IPTC:ObjectName": 'ХОККЕЙ',
                    'XMP:Rating': "3",
                    'XMP:Description':  caption,
+                   'IPTC:Caption-Abstract':  cPption,
+                   'IPTC:Credit': 'ХК СКА',
+                   'IPTC:By-line': 'ХК СКА',
+                   'IPTC:CopyrightNotice': 'ХК СКА',
                    'XMP:Label': 'Red',
                    'XMP:Creator': 'ХК СКА'}
     with exiftool.ExifToolHelper() as et:
