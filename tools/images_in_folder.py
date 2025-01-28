@@ -1,7 +1,7 @@
 import os
 from loguru import logger
 
-from exif_job import write_tags_to_image
+from tools.exif_job import write_tags_to_image
 from send_photo_tg import send_photo_as_file
 
 # Получаем путь к директории скрипта

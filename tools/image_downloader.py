@@ -2,7 +2,7 @@ from io import BytesIO
 import requests
 import urllib3
 from PIL import Image
-from file_name_from_link import extract_file_name
+from tools.file_name_from_link import extract_file_name
 
 
 # pip install requests Pillow

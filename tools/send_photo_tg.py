@@ -18,5 +18,5 @@ def send_photo_as_file(img_path, chat_id='187597961'):
 
 
 if __name__ == '__main__':
-    send_photo_as_file('./tests/test_images/20010402_pavl_18_up.jpeg')
+    send_photo_as_file('../tests/test_images/20010402_pavl_18_up.jpeg')
 

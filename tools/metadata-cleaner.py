@@ -59,4 +59,4 @@ def main(path_to_image):
     # print(message)
 
 if __name__ == "__main__":
-    main('./tests/test_images/20010402_pavl_18_up.jpeg')
+    main('../tests/test_images/20010402_pavl_18_up.jpeg')
