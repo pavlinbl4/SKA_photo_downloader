@@ -70,12 +70,12 @@ if __name__ == '__main__':
     logger.info(_album_name)
 
     # проверяю не скачан ли альбом ранее
-    old_albums = read_albums()
+    old_albums = read_albums(script_dir)
     # logger.info(old_albums = read_albums())
 
     if _album_name + '\n' not in old_albums:
 
-        save_album_name(_album_name)
+        save_album_name(_album_name, script_dir)
         send_telegram_message(_album_name)
 
         # игровые снимки начинаются примерно с 40 кадра, берем срез в 20 снимков
