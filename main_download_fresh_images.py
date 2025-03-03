@@ -70,19 +70,19 @@ if __name__ == '__main__':
     logger.info(_album_name)
 
     # проверяю не скачан ли альбом ранее
-    old_albums = read_albums(script_dir)
+    old_albums = read_albums()
     # logger.info(old_albums = read_albums())
 
     if _album_name + '\n' not in old_albums:
 
-        save_album_name(_album_name, script_dir)
+        save_album_name(_album_name)
         send_telegram_message(_album_name)
 
         # игровые снимки начинаются примерно с 40 кадра, берем срез в 20 снимков
         for image_link in images_links_list:
             # for image_link in images_links_list:
             print(image_link)
-            downloader(image_link, _album_name, script_dir)
+            downloader(image_link, _album_name)
 
         write_tags_to_image(path_to_download, _album_name)
 

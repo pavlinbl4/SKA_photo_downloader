@@ -4,7 +4,7 @@ import urllib3
 from PIL import Image
 from tools.file_name_from_link import extract_file_name
 
-
+# pip install pillow
 # pip install requests Pillow
 
 
